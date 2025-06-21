@@ -7,7 +7,7 @@ export default function Contact() {
     email: '',
     message: ''
   });
-  const [status, setStatus] = useState(''); // '', 'sending', 'success', 'error'
+  const [status, setStatus] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
 
   const sectionRef = useRef(null);
@@ -35,12 +35,8 @@ export default function Contact() {
     setStatus('sending');
     setResponseMessage('');
 
-    const backendURL = import.meta.env.PROD
-      ? 'https://portfolio-backend-oguu.onrender.com'
-      : 'http://localhost:5000';
-
     try {
-      const response = await fetch(`${backendURL}/api/contact`, {
+      const response = await fetch("https://portfolio-backend-oguu.onrender.com/api/contact", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -56,12 +52,15 @@ export default function Contact() {
         setFormData({ name: '', email: '', message: '' });
       } else {
         setStatus('error');
-        const errorMessage = data.details ? `${data.error}: ${data.details}` : data.error || 'An error occurred.';
+        const errorMessage = data.details
+          ? `${data.error}: ${data.details}`
+          : data.error || 'An error occurred.';
         setResponseMessage(errorMessage);
       }
     } catch (error) {
+      console.error("❌ Contact form error:", error);
       setStatus('error');
-      setResponseMessage('Failed to connect to the server. Please try again later.');
+      setResponseMessage('❌ Failed to connect to the server. Please try again later.');
     }
   };
 
