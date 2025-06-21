@@ -21,8 +21,4 @@ const App = () => {
   );
 };
 
-app.get("/", (req, res) => {
-  res.send("Portfolio backend is live ✅");
-});
-
 export default App;
