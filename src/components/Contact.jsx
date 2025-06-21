@@ -36,7 +36,7 @@ export default function Contact() {
     setResponseMessage('');
 
     const backendURL = import.meta.env.PROD
-      ? 'https://portfolio-backend.onrender.com'
+      ? 'https://portfolio-backend-oguu.onrender.com'
       : 'http://localhost:5000';
 
     try {
