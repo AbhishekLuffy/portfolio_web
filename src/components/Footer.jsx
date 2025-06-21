@@ -44,6 +44,7 @@ export default function Footer() {
           </a>
         ))}
       </div>
+      <p className="text-gray-400 mb-4">Open to freelance and internship opportunities</p>
       <div className="text-gray-500 font-medium text-base">© 2025 Abhishek P</div>
     </motion.footer>
   );
