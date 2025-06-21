@@ -10,18 +10,14 @@ const port = process.env.PORT || 5000;
 console.log('GMAIL_USER:', process.env.GMAIL_USER);
 console.log('GMAIL_PASS length:', process.env.GMAIL_PASS ? process.env.GMAIL_PASS.length : 0);
 
-const allowedOrigins = [
-  'http://localhost:5173',
-  'https://glittering-hotteok-043b56.netlify.app' // ✅ Your real frontend
-];
-
 // Middleware
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true,
-}));
-
+app.use(cors({ origin: '*' }));
 app.use(express.json());
+
+// Root route for testing
+app.get('/', (req, res) => {
+  res.send('Portfolio backend is live ✅');
+});
 
 // Nodemailer transporter setup
 const transporter = nodemailer.createTransport({
@@ -43,8 +39,8 @@ transporter.verify((error, success) => {
 });
 
 // API endpoint for sending emails
-app.post('/send-email', async (req, res) => {
-  console.log('Received /send-email request with body:', req.body);
+app.post('/api/contact', async (req, res) => {
+  console.log('Received /api/contact request with body:', req.body);
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {

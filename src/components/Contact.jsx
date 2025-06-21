@@ -36,11 +36,11 @@ export default function Contact() {
     setResponseMessage('');
 
     const backendURL = import.meta.env.PROD
-      ? 'https://portfolio-backend-oguu.onrender.com'
+      ? 'https://portfolio-backend.onrender.com'
       : 'http://localhost:5000';
 
     try {
-      const response = await fetch(`${backendURL}/send-email`, {
+      const response = await fetch(`${backendURL}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
