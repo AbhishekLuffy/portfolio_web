@@ -2,12 +2,6 @@ import { motion } from 'framer-motion';
 
 const projects = [
   {
-    name: 'BugSniper',
-    desc: 'AI-powered tool for debugging, optimization, and security auditing.',
-    stack: ['Java', 'Node.js', 'HTML', 'CSS', 'JavaScript'],
-    github: 'https://github.com/AbhishekLuffy/BugSniper',
-  },
-  {
     name: 'Silent Sentinel',
     desc: 'An emergency alert system triggered by a secret voice command. It records audio evidence, fetches the user\'s location, and sends alerts via SMS (Twilio) and email (Gmail).',
     stack: ['Python', 'Twilio API', 'Gmail API', 'PyAudio'],
