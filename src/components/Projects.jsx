@@ -19,12 +19,6 @@ const projects = [
     stack: ['Python', 'Matplotlib', 'Crypto'],
     github: 'https://github.com/AbhishekLuffy/EncryptionDecryption',
   },
-  {
-    name: 'Smart Home Violence Alert System',
-    desc: 'IoT-based alert system using sensors and AI to detect and notify emergency contacts.',
-    stack: ['React.js', 'Flutter', 'Node.js', 'IoT Hardware'],
-    github: '',
-  },
 ];
 
 const cardVariants = {
