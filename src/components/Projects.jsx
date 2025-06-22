@@ -8,6 +8,12 @@ const projects = [
     github: 'https://github.com/AbhishekLuffy/BugSniper',
   },
   {
+    name: 'Silent Sentinel',
+    desc: 'An emergency alert system triggered by a secret voice command. It records audio evidence, fetches the user\'s location, and sends alerts via SMS (Twilio) and email (Gmail).',
+    stack: ['Python', 'Twilio API', 'Gmail API', 'PyAudio'],
+    github: 'https://github.com/AbhishekLuffy/Silent-Sentinel',
+  },
+  {
     name: 'Encryption & Decryption App',
     desc: 'Custom-built Blowfish and Twofish encryption system for large data files.',
     stack: ['Python', 'Matplotlib', 'Crypto'],
