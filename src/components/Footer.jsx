@@ -45,6 +45,10 @@ export default function Footer() {
         ))}
       </div>
       <p className="text-gray-400 mb-4">Open to freelance and internship opportunities</p>
+      <div className="flex flex-col items-center gap-1 mb-4">
+        <a href="mailto:abhiskekp81@gmail.com" className="text-gray-400 hover:text-blue-400 transition-colors text-base">abhiskekp81@gmail.com</a>
+        <a href="tel:+919008247341" className="text-gray-400 hover:text-blue-400 transition-colors text-base">+91 9008247341</a>
+      </div>
       <div className="text-gray-500 font-medium text-base">© 2025 Abhishek P</div>
     </motion.footer>
   );
