@@ -1,6 +1,7 @@
 import { motion, useAnimation } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { useInView } from 'framer-motion';
+import Footer from './Footer';
 
 const education = [
   {
@@ -109,6 +110,7 @@ export default function Resume() {
           </div>
         </div>
       </div>
+      <Footer />
     </motion.section>
   );
 }
