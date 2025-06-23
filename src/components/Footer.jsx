@@ -1,61 +1,98 @@
-import { motion, useAnimation, useInView } from 'framer-motion';
-import { useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+
+const navLinks = [
+  { href: '#', label: 'Home' },
+  { href: '#about', label: 'About' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#resume', label: 'Resume' },
+  { href: '#contact', label: 'Contact' },
+];
 
 const socials = [
-  { href: 'https://github.com/AbhishekLuffy', label: 'GitHub', icon: (
-    <svg width="24" height="24" fill="currentColor" className="inline-block"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.38 9.38 0 0 1 12 6.84c.85.004 1.7.12 2.5.34 1.9-1.33 2.74-1.05 2.74-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .26.18.57.69.47A10.01 10.01 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/></svg>
-  ) },
-  { href: 'https://www.linkedin.com/in/abhishek-p-1007062b8', label: 'LinkedIn', icon: (
-    <svg width="24" height="24" fill="currentColor" className="inline-block"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.29c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm13.5 10.29h-3v-4.5c0-1.08-.02-2.47-1.5-2.47-1.5 0-1.73 1.17-1.73 2.39v4.58h-3v-9h2.89v1.23h.04c.4-.75 1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v4.72z"/></svg>
-  ) },
+  { href: 'https://github.com/AbhishekLuffy', label: 'GitHub', icon: <FaGithub /> },
+  { href: 'https://www.linkedin.com/in/abhishek-p-1007062b8', label: 'LinkedIn', icon: <FaLinkedin /> },
 ];
 
 export default function Footer() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { amount: 0.3, once: false });
-  const controls = useAnimation();
+  const [showScroll, setShowScroll] = useState(false);
 
   useEffect(() => {
-    if (inView) {
-      controls.start({ y: 0, opacity: 1, transition: { duration: 0.8, type: 'spring' } });
-    } else {
-      controls.start({ y: 100, opacity: 0, transition: { duration: 0.5 } });
-    }
-  }, [inView, controls]);
+    const handleScroll = () => {
+      setShowScroll(window.scrollY > 200);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <motion.footer
-      ref={ref}
-      initial={{ y: 100, opacity: 0 }}
-      animate={controls}
-      className="p-8 bg-black border-t border-gray-800 mt-12"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.8, type: 'spring' }}
+      className="bg-gray-950 text-gray-300 border-t border-gray-800 px-6 py-10 mt-16 relative"
+      aria-label="Footer"
     >
-      <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-8">
-        {/* Left side: message and copyright */}
-        <div className="text-left flex-1">
-          <p className="text-gray-400 mb-4">Open to freelance and internship opportunities</p>
-          <div className="text-gray-500 font-medium text-base">© 2025 Abhishek P</div>
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+        {/* Left: Name & tagline */}
+        <div className="flex flex-col gap-2 md:items-start items-center">
+          <span className="text-xl font-bold text-white">Abhishek P</span>
+          <span className="text-sm text-gray-400">Building solutions one line at a time</span>
         </div>
-        {/* Right side: socials and contact */}
-        <div className="flex flex-col items-end gap-2 flex-1">
-          <div className="flex gap-4 mb-2">
-            {socials.map((s) => (
+        {/* Center: Navigation */}
+        <nav aria-label="Footer navigation" className="flex flex-wrap justify-center gap-4">
+          {navLinks.map(link => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="text-gray-400 hover:text-blue-400 transition-colors px-2 py-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+        {/* Right: Socials */}
+        <div className="flex flex-col md:items-end items-center gap-2">
+          <div className="flex gap-4 mb-1">
+            {socials.map(s => (
               <a
                 key={s.label}
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-blue-400 transition-colors text-2xl"
                 aria-label={s.label}
+                className="text-gray-400 hover:text-blue-400 transition-colors text-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
               >
                 {s.icon}
               </a>
             ))}
           </div>
-          <a href="mailto:abhiskekp81@gmail.com" className="text-gray-400 hover:text-blue-400 transition-colors text-base">abhiskekp81@gmail.com</a>
-          <a href="tel:+919008247341" className="text-gray-400 hover:text-blue-400 transition-colors text-base">+91 9008247341</a>
         </div>
       </div>
+      {/* Copyright */}
+      <div className="mt-8 text-center text-xs text-gray-500">
+        © 2025 Abhishek P. All rights reserved.
+      </div>
+      {/* Scroll to top button */}
+      <motion.button
+        type="button"
+        onClick={scrollToTop}
+        aria-label="Scroll to top"
+        initial={{ opacity: 0, y: 20 }}
+        animate={showScroll ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.4 }}
+        className="fixed bottom-8 right-8 z-50 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
+        style={{ pointerEvents: showScroll ? 'auto' : 'none' }}
+      >
+        <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7" /></svg>
+      </motion.button>
     </motion.footer>
   );
+}
 }
