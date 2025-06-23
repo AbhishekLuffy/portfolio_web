@@ -28,28 +28,34 @@ export default function Footer() {
       ref={ref}
       initial={{ y: 100, opacity: 0 }}
       animate={controls}
-      className="p-8 text-center bg-black border-t border-gray-800 mt-12"
+      className="p-8 bg-black border-t border-gray-800 mt-12"
     >
-      <div className="flex justify-center gap-8 mb-4">
-        {socials.map((s) => (
-          <a
-            key={s.label}
-            href={s.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-blue-400 transition-colors text-2xl"
-            aria-label={s.label}
-          >
-            {s.icon}
-          </a>
-        ))}
+      <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-8">
+        {/* Left side: message and copyright */}
+        <div className="text-left flex-1">
+          <p className="text-gray-400 mb-4">Open to freelance and internship opportunities</p>
+          <div className="text-gray-500 font-medium text-base">© 2025 Abhishek P</div>
+        </div>
+        {/* Right side: socials and contact */}
+        <div className="flex flex-col items-end gap-2 flex-1">
+          <div className="flex gap-4 mb-2">
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-blue-400 transition-colors text-2xl"
+                aria-label={s.label}
+              >
+                {s.icon}
+              </a>
+            ))}
+          </div>
+          <a href="mailto:abhiskekp81@gmail.com" className="text-gray-400 hover:text-blue-400 transition-colors text-base">abhiskekp81@gmail.com</a>
+          <a href="tel:+919008247341" className="text-gray-400 hover:text-blue-400 transition-colors text-base">+91 9008247341</a>
+        </div>
       </div>
-      <p className="text-gray-400 mb-4">Open to freelance and internship opportunities</p>
-      <div className="flex flex-col items-center gap-1 mb-4">
-        <a href="mailto:abhiskekp81@gmail.com" className="text-gray-400 hover:text-blue-400 transition-colors text-base">abhiskekp81@gmail.com</a>
-        <a href="tel:+919008247341" className="text-gray-400 hover:text-blue-400 transition-colors text-base">+91 9008247341</a>
-      </div>
-      <div className="text-gray-500 font-medium text-base">© 2025 Abhishek P</div>
     </motion.footer>
   );
 }
