@@ -9,7 +9,8 @@ const projects = [
   },
   {
     name: 'Encryption & Decryption App',
-    desc: 'Custom-built Blowfish and Twofish encryption system for large data files. Awarded 2nd Prize at [Sai vidya institute of technology] for innovation and implementation.',
+    desc: 'Custom-built Blowfish and Twofish encryption system for large data files.',
+    award: 'Awarded 2nd Prize at [Sai vidya institute of technology] for innovation and implementation.',
     stack: ['Python', 'Matplotlib', 'Crypto'],
     github: 'https://github.com/AbhishekLuffy/EncryptionDecryption',
   },
@@ -42,6 +43,11 @@ export default function Projects() {
               {proj.name}
             </h3>
             <p className="text-gray-300 flex-1 text-base">{proj.desc}</p>
+            {proj.award && (
+              <div className="my-2 px-3 py-2 rounded bg-yellow-300/20 border-l-4 border-yellow-400 font-semibold text-yellow-900 text-sm">
+                {proj.award}
+              </div>
+            )}
             <div className="flex flex-wrap gap-2 mt-2">
               {proj.stack.map((tech) => (
                 <span key={tech} className="bg-blue-800 text-blue-200 px-2 py-1 rounded text-xs font-medium">
