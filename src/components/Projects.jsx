@@ -9,7 +9,7 @@ const projects = [
   },
   {
     name: 'Encryption & Decryption App',
-    desc: 'Custom-built Blowfish and Twofish encryption system for large data files. Awarded 3rd Prize at [Sai vidya institute of technology] for innovation and implementation.',
+    desc: 'Custom-built Blowfish and Twofish encryption system for large data files. Awarded 2nd Prize at [Sai vidya institute of technology] for innovation and implementation.',
     stack: ['Python', 'Matplotlib', 'Crypto'],
     github: 'https://github.com/AbhishekLuffy/EncryptionDecryption',
   },
