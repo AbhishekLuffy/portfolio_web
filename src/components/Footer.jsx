@@ -52,7 +52,7 @@ export default function Footer() {
               key={link.label}
               href={link.href}
               className="text-gray-400 hover:text-blue-400 transition-colors px-2 py-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
-            >
+    >
               {link.label}
             </a>
           ))}
@@ -61,18 +61,18 @@ export default function Footer() {
         <div className="flex flex-col md:items-end items-center gap-2">
           <div className="flex gap-4 mb-1">
             {socials.map(s => (
-              <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={s.label}
+          <a
+            key={s.label}
+            href={s.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={s.label}
                 className="text-gray-400 hover:text-blue-400 transition-colors text-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
-              >
-                {s.icon}
-              </a>
-            ))}
-          </div>
+          >
+            {s.icon}
+          </a>
+        ))}
+      </div>
         </div>
       </div>
       {/* Copyright */}

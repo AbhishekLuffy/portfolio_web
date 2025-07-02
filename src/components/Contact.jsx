@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
+import * as Toast from '@radix-ui/react-toast';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,9 @@ export default function Contact() {
   });
   const [status, setStatus] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
+  const [toastOpen, setToastOpen] = useState(false);
+  const [toastType, setToastType] = useState('success'); // 'success' | 'error'
+  const [toastMsg, setToastMsg] = useState('');
 
   const sectionRef = useRef(null);
   const inView = useInView(sectionRef, { amount: 0.3, once: false });
@@ -48,19 +52,25 @@ export default function Contact() {
 
       if (response.ok) {
         setStatus('success');
-        setResponseMessage(data.message || 'Email sent successfully!');
+        setToastType('success');
+        setToastMsg(data.message || 'Email sent successfully!');
+        setToastOpen(true);
         setFormData({ name: '', email: '', message: '' });
       } else {
         setStatus('error');
+        setToastType('error');
         const errorMessage = data.details
           ? `${data.error}: ${data.details}`
           : data.error || 'An error occurred.';
-        setResponseMessage(errorMessage);
+        setToastMsg(errorMessage);
+        setToastOpen(true);
       }
     } catch (error) {
       console.error("❌ Contact form error:", error);
       setStatus('error');
-      setResponseMessage('❌ Failed to connect to the server. Please try again later.');
+      setToastType('error');
+      setToastMsg('❌ Failed to connect to the server. Please try again later.');
+      setToastOpen(true);
     }
   };
 
@@ -110,11 +120,19 @@ export default function Contact() {
             {status === 'sending' ? 'Sending...' : 'Send Message'}
           </button>
         </form>
-        {responseMessage && (
-          <p className={`mt-4 text-center ${status === 'success' ? 'text-green-400' : 'text-red-400'}`}>
-            {responseMessage}
-          </p>
-        )}
+        {/* Radix Toast for notifications */}
+        <Toast.Provider swipeDirection="right">
+          <Toast.Root
+            open={toastOpen}
+            onOpenChange={setToastOpen}
+            className={`fixed bottom-8 right-8 z-[100] px-6 py-4 rounded-lg shadow-lg text-base font-semibold transition-colors duration-200
+              ${toastType === 'success' ? 'bg-green-700 text-white' : 'bg-red-700 text-white'}`}
+          >
+            <Toast.Title>{toastType === 'success' ? 'Success' : 'Error'}</Toast.Title>
+            <Toast.Description>{toastMsg}</Toast.Description>
+          </Toast.Root>
+          <Toast.Viewport className="fixed bottom-0 right-0 flex flex-col p-6 gap-2 w-96 max-w-full z-[100]" />
+        </Toast.Provider>
       </div>
     </motion.section>
   );
