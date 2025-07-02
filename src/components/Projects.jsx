@@ -44,7 +44,7 @@ export default function Projects() {
             </h3>
             <p className="text-gray-300 flex-1 text-base">{proj.desc}</p>
             {proj.award && (
-              <div className="my-2 px-3 py-2 rounded bg-yellow-300/20 border-l-4 border-yellow-400 font-semibold text-yellow-900 text-sm">
+              <div className="my-2 px-4 py-2 rounded-lg bg-blue-600 text-white font-bold text-base shadow-lg border border-blue-400 animate-pulse">
                 {proj.award}
               </div>
             )}
